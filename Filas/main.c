@@ -8,7 +8,7 @@ int main(void){
         return 1;
     }
 
-    printf("Fila criada.\n");
+    printf("Fila de produtos criada.\n");
     printf("Tamanho inicial: %d\n", tamanho_Fila(f));
     printf("Esta vazia? ");
     if (Fila_vazia(f)){
@@ -17,33 +17,33 @@ int main(void){
         printf("Nao\n");
     }
 
-    /* alunos de exemplo */
-    struct aluno a1 = {101, "Ana",   8.0f, 7.5f, 9.0f};
-    struct aluno a2 = {202, "Bruno", 6.0f, 8.0f, 7.0f};
-    struct aluno a3 = {303, "Clara", 9.0f, 9.5f, 8.5f};
+    /* produtos de exemplo */
+    Elemento p1  = {101, "Carne", 40.00f  };
+    Elemento p2  = {202, "Cenoura", 2.50f };
+    Elemento p3  = {303, "Ovo", 10.00f };
 
-    struct aluno frente;
+    Elemento frente;
 
     // Enfileirar 1 a 1
-    printf("\nInserindo Aluno...\n");
-    insere_Fila(f, a1);
+    printf("\nInserindo produto...\n");
+    insere_Fila(f, p1);
     printf("Tamanho: %d\n", tamanho_Fila(f));
     if (consulta_Fila(f, &frente)){
-        printf("Frente: %d - %s\n", frente.matricula, frente.nome);
+        printf("Frente: Codigo %d, Desc: %s, Preco: R$%.2f\n", frente.codigo, frente.descricao, frente.preco);
     }
 
-    printf("\nInserindo Aluno...\n");
-    insere_Fila(f, a2);
+    printf("\nInserindo produto...\n");
+    insere_Fila(f, p2);
     printf("Tamanho: %d\n", tamanho_Fila(f));
     if (consulta_Fila(f, &frente)){
-        printf("Frente: %d - %s\n", frente.matricula, frente.nome);
+        printf("Frente: Codigo %d, Desc: %s, Preco: R$%.2f\n", frente.codigo, frente.descricao, frente.preco);
     }
 
-    printf("\nInserindo Aluno...\n");
-    insere_Fila(f, a3);
+    printf("\nInserindo produto...\n");
+    insere_Fila(f, p3);
     printf("Tamanho: %d\n", tamanho_Fila(f));
     if (consulta_Fila(f, &frente)){
-        printf("Frente: %d - %s\n", frente.matricula, frente.nome);
+        printf("Frente: Codigo %d, Desc: %s, Preco: R$%.2f\n", frente.codigo, frente.descricao, frente.preco);
     }
 
     printf("\nEsta vazia? ");
@@ -56,27 +56,27 @@ int main(void){
     // Remover 1 a 1 (sempre remove do INICIO)
     printf("\nRemovendo do inicio...\n");
     if (consulta_Fila(f, &frente)){
-        printf("Removendo: %d - %s\n", frente.matricula, frente.nome);
+        printf("Removendo: Codigo %d, Desc: %s, Preco: R$%.2f\n", frente.codigo, frente.descricao, frente.preco);
     }
     remove_Fila(f);
     printf("Tamanho: %d\n", tamanho_Fila(f));
     if (consulta_Fila(f, &frente)){
-        printf("Novo frente: %d - %s\n", frente.matricula, frente.nome);
+        printf("Novo frente: Codigo %d, Desc: %s, Preco: R$%.2f\n", frente.codigo, frente.descricao, frente.preco);
     }
 
     printf("\nRemovendo do inicio...\n");
     if (consulta_Fila(f, &frente)){
-        printf("Removendo: %d - %s\n", frente.matricula, frente.nome);
+        printf("Removendo: Codigo %d, Desc: %s, Preco: R$%.2f\n", frente.codigo, frente.descricao, frente.preco);
     }
     remove_Fila(f);
     printf("Tamanho: %d\n", tamanho_Fila(f));
     if (consulta_Fila(f, &frente)){
-        printf("Novo frente: %d - %s\n", frente.matricula, frente.nome);
+        printf("Novo frente: Codigo %d, Desc: %s, Preco: R$%.2f\n", frente.codigo, frente.descricao, frente.preco);
     }
 
     printf("\nRemovendo do inicio...\n");
     if (consulta_Fila(f, &frente)){
-        printf("Removendo: %d - %s\n", frente.matricula, frente.nome);
+        printf("Removendo: Codigo %d, Desc: %s, Preco: R$%.2f\n", frente.codigo, frente.descricao, frente.preco);
     }
     remove_Fila(f);
     printf("Tamanho: %d\n", tamanho_Fila(f));
