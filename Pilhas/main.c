@@ -31,7 +31,8 @@ int main(void){
     insere_Pilha(p, a1);
     printf("Tamanho: %d\n", tamanho_Pilha(p));
     if (acessa_topo_Pilha(p, &topo)){
-        printf("Topo: %d - %s\n", topo.matricula, topo.nome);
+        float media = (topo.n1 + topo.n2 + topo.n3) / 3.0f;
+        printf("Topo: %d - %s| Media: %.2f\n", topo.matricula, topo.nome, media);
     }
         
 
@@ -39,14 +40,16 @@ int main(void){
     insere_Pilha(p, a2);
     printf("Tamanho: %d\n", tamanho_Pilha(p));
     if (acessa_topo_Pilha(p, &topo)){
-        printf("Topo: %d - %s\n", topo.matricula, topo.nome);
+        float media = (topo.n1 + topo.n2 + topo.n3) / 3.0f;
+        printf("Topo: %d - %s| Media: %.2f\n", topo.matricula, topo.nome, media);
     }
         
     printf("\nInserindo Aluno...\n");
     insere_Pilha(p, a3);
     printf("Tamanho: %d\n", tamanho_Pilha(p));
     if (acessa_topo_Pilha(p, &topo)){
-        printf("Topo: %d - %s\n", topo.matricula, topo.nome);
+        float media = (topo.n1 + topo.n2 + topo.n3) / 3.0f;
+        printf("Topo: %d - %s| Media: %.2f\n", topo.matricula, topo.nome, media);
     }
         
 
