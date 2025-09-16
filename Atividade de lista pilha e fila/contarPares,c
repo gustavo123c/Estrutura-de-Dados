@@ -1,0 +1,59 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Definição do nó da lista
+typedef struct No {
+    int valor;
+    struct No* prox;
+} No;
+
+// Função para inserir no final da lista
+void inserirFim(No** lista, int valor) {
+    No* novo = (No*) malloc(sizeof(No));
+    novo->valor = valor;
+    novo->prox = NULL;
+
+    if (*lista == NULL) {
+        *lista = novo;  // lista estava vazia
+    } else {
+        No* aux = *lista;
+        while (aux->prox != NULL) {
+            aux = aux->prox;  // vai até o último nó
+        }
+        aux->prox = novo;  // insere no final
+    }
+}
+
+// Função que conta quantos números pares existem na lista
+int contarPares(No* lista) {
+    int contador = 0;
+    No* aux = lista;
+    while (aux != NULL) {
+        if (aux->valor % 2 == 0) {
+            contador++;  // incrementa se for par
+        }
+        aux = aux->prox;  // avança para o próximo nó
+    }
+    return contador;
+}
+
+// Função para imprimir a lista
+void mostrarLista(No* lista) {
+    No* aux = lista;
+    while (aux != NULL) {
+        printf("%d ", aux->valor);
+        aux = aux->prox;
+    }
+    printf("\n");
+}
+
+// Função para liberar memória da lista
+void liberarLista(No* lista) {
+    No* aux;
+    while (lista != NULL) {
+        aux = lista;
+        lista = lista->prox;
+        free(aux);
+    }
+}
+
