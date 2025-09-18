@@ -30,7 +30,7 @@ int desenfileirar(Fila* f){
         printf("A fila esta vazia.\n");
         return -1;
     }
-    int valor = f->dados[f->inicio];     // pega o valor da frente
+    int valor = f->dados[f->inicio];     // pega o valor da frente  
     f->inicio = (f->inicio + 1) % MAX;   // avança o início
     f->qtd--;                            // diminui a quantidade
     return valor;                        // devolve o valor removido

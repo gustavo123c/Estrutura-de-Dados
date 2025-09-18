@@ -1,33 +1,45 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
 #include "quadrado.h"
 
-// Inicializa o quadrado com um valor para o lado
-void inicializarQuadrado(Quadrado *q, float lado) {
-    if (lado > 0) {
-        q->lado = lado;
-    } else {
-        q->lado = 1; // valor padrão caso seja inválido
-        printf("Valor invalido, lado definido como 1.\n");
+// Cria e inicializa um quadrado
+Quadrado* Quadrado_Criar(float lado) {
+    Quadrado *q = (Quadrado*) malloc(sizeof(Quadrado));
+    if (q != NULL) {
+        if (lado > 0) {
+            q->lado = lado;
+        } else {
+            q->lado = 1; // valor padrão
+            printf("Valor invalido, lado definido como 1.\n");
+        }
+    }
+    return q;
+}
+
+// Libera memória do quadrado
+void Quadrado_Destruir(Quadrado *q) {
+    if (q != NULL) {
+        free(q);
     }
 }
 
-// Retorna o valor do lado
-float obterLado(Quadrado *q) {
+// Retorna o lado
+float Quadrado_ObterLado(Quadrado *q) {
     return q->lado;
 }
 
-// Retorna o perímetro (4 * lado)
-float calcularPerimetro(Quadrado *q) {
+// Retorna o perímetro
+float Quadrado_Perimetro(Quadrado *q) {
     return 4 * q->lado;
 }
 
-// Retorna a área (lado^2)
-float calcularArea(Quadrado *q) {
+// Retorna a área
+float Quadrado_Area(Quadrado *q) {
     return q->lado * q->lado;
 }
 
-// Retorna a diagonal (lado * sqrt(2))
-float calcularDiagonal(Quadrado *q) {
+// Retorna a diagonal
+float Quadrado_Diagonal(Quadrado *q) {
     return q->lado * sqrt(2);
 }

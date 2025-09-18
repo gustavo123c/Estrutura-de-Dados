@@ -1,34 +1,16 @@
 #include <stdio.h>
-#include <stdbool.h>
-#include "pilha.h"
-
-int verificaParenteses(const char *expressao) {
-    Pilha p;
-    inicializarPilha(&p);
-
-    for (int i = 0; expressao[i] != '\0'; i++) {
-        char c = expressao[i];
-
-        if (c == '(') {
-            empilhar(&p, c);
-        } else if (c == ')') {
-            if (pilhaVazia(&p)) {
-                return false; // fecha sem abrir
-            }
-            desempilhar(&p);
-        }
-    }
-
-    return pilhaVazia(&p); // só é válida se acabar vazia
-}
+#include "pilha.h"  // cabeçalho da pilha
 
 int main() {
-    const char *expressao = "((a+b) * (c-d))";
+    char expressao[100];
+    
+    printf("Digite sua expressao:\n");
+    scanf("%s", expressao);
 
-    if (verificaParenteses(expressao)) {
-        printf("Expressao CORRETA\n");
+    if (verificarExpressao(expressao)) {
+        printf("Expressao CORRETA!\n");
     } else {
-        printf("Expressao INCORRETA\n");
+        printf("Expressao INCORRETA!\n");
     }
 
     return 0;

@@ -1,14 +1,15 @@
 #define PILHA_H
 
-#define MAX_TAM 100
+#define MAX 100
 
 typedef struct{
-    char itens[MAX_TAM];
+    char itens[MAX];
     int topo;
 }Pilha;
 
-void inicializarPilha(Pilha *p);
+Pilha* cria_Pilha();
 int pilhaVazia (Pilha *p);
 int pilhaCheia (Pilha *p);
 void empilhar (Pilha *p, char c);
 char desempilhar(Pilha *p);
+int verificarExpressao(const char *expr);

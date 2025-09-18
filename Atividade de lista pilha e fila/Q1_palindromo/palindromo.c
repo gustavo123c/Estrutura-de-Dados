@@ -1,9 +1,14 @@
-#include <stdio.h>      // Adicionado para a função printf()
-#include <string.h>     // Adicionado para a função strlen()
-#include "palindromo.h" // Inclui nosso header com todas as definições
+#include <stdio.h>
+#include <stdlib.h>     // Para malloc e free
+#include <string.h>
+#include "palindromo.h"
 
-void inicializarPilha(Pilha *p) {
-    p->topo = -1;
+Pilha* cria_Pilha() {
+    Pilha *p = (Pilha*) malloc(sizeof(Pilha)); // aloca dinamicamente
+    if (p != NULL) {
+        p->topo = -1; // inicializa a pilha
+    }
+    return p;
 }
 
 int pilhaVazia(Pilha *p) {
@@ -14,7 +19,7 @@ int pilhaCheia(Pilha *p) {
     return p->topo == MAX - 1;
 }
 
-void empilhar(Pilha *p, char c) {
+void empilhar(Pilha *p, char c) { //O nome tambem poderia ser inserir
     if (pilhaCheia(p)) {
         printf("Erro: tentativa de empilhar em pilha cheia\n");
     } else {
@@ -23,7 +28,7 @@ void empilhar(Pilha *p, char c) {
     }
 }
     
-char desempilhar(Pilha *p) {
+char desempilhar(Pilha *p) { // o nome tambem poderia ser remover
     if (pilhaVazia(p)) {
         printf("Erro: tentativa de desempilhar de pilha vazia\n");
         return '\0';
@@ -35,22 +40,36 @@ char desempilhar(Pilha *p) {
 }
 
 int ehPalindromo(const char *palavra) {
-    Pilha p;
-    inicializarPilha(&p);
-    int tamanho = strlen(palavra); // Agora o compilador conhece strlen()
-
-    // Etapa 1: Empilhar
-    for (int i = 0; i < tamanho; i++) {
-        empilhar(&p, palavra[i]);
+    // Passo 1: Criar a pilha dinamicamente
+    Pilha *p = cria_Pilha();  
+    if (p == NULL) { // Se malloc falhar
+        printf("Erro: nao foi possivel criar a pilha!\n");
+        return 0; // Consideramos que nao eh palindromo
     }
 
-    // Etapa 2: Desempilhar e comparar
+    // Passo 2: Calcular o tamanho manualmente (sem strlen)
+    int tamanho = 0;
+    while (palavra[tamanho] != '\0') {
+        tamanho++;
+    }
+
+    // Passo 3: Empilhar todos os caracteres da palavra
     for (int i = 0; i < tamanho; i++) {
-        char charDaPilha = desempilhar(&p);
-        if (palavra[i] != charDaPilha) {
-            return 0; // Falso
+        empilhar(p, palavra[i]);
+    }
+
+    // Passo 4: Desempilhar e comparar
+    for (int i = 0; i < tamanho; i++) {
+        char doTopo = desempilhar(p);   // pega o caractere do final
+        char doOriginal = palavra[i];   // pega o caractere do inicio
+
+        if (doOriginal != doTopo) {
+            libera_Pilha(p); // liberar antes de sair
+            return 0;        // nao eh palindromo
         }
     }
-    
-    return 1; // Verdadeiro
+
+    // Passo 5: Liberar memoria e retornar verdadeiro
+    libera_Pilha(p);
+    return 1;
 }

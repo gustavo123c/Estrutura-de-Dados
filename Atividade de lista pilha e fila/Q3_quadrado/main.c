@@ -1,23 +1,24 @@
 #include <stdio.h>
 #include "quadrado.h"
 
-int main(void) {
-    Quadrado q;
-    float lado;
+int main() {
+    Quadrado *q1 = Quadrado_Criar(5);
+    Quadrado *q2 = Quadrado_Criar(-2); // valor inválido → lado = 1
 
-    printf("Digite o valor do lado do quadrado: ");
-    if (scanf("%f", &lado) != 1) {
-        printf("Entrada invalida.\n");
-        return 1;
-    }
+    printf("Quadrado 1:\n");
+    printf("Lado = %.2f\n", Quadrado_ObterLado(q1));
+    printf("Perimetro = %.2f\n", Quadrado_Perimetro(q1));
+    printf("Area = %.2f\n", Quadrado_Area(q1));
+    printf("Diagonal = %.2f\n\n", Quadrado_Diagonal(q1));
 
-    inicializarQuadrado(&q, lado);
+    printf("Quadrado 2:\n");
+    printf("Lado = %.2f\n", Quadrado_ObterLado(q2));
+    printf("Perimetro = %.2f\n", Quadrado_Perimetro(q2));
+    printf("Area = %.2f\n", Quadrado_Area(q2));
+    printf("Diagonal = %.2f\n", Quadrado_Diagonal(q2));
 
-    printf("\n--- Informacoes do Quadrado ---\n");
-    printf("Lado: %.2f\n", obterLado(&q));
-    printf("Perimetro: %.2f\n", calcularPerimetro(&q));
-    printf("Area: %.2f\n", calcularArea(&q));
-    printf("Diagonal: %.2f\n", calcularDiagonal(&q));
+    Quadrado_Destruir(q1);
+    Quadrado_Destruir(q2);
 
     return 0;
 }
