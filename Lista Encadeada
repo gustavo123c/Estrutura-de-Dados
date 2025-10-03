@@ -111,6 +111,12 @@ void libera_lista(Lista *li){
     }
 }
 
+remove_final
+
+lista_vazia
+
+busca_lista
+
 // Função principal
 int main() {
     Lista* li = cria_lista();  // Cria a lista
