@@ -1,0 +1,120 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Definindo a estrutura do nó da lista
+struct elemento {
+    int dado;                  // Valor armazenado no nó
+    struct elemento *prox;     // Ponteiro para o próximo nó
+};
+
+// Definindo os tipos de dados para facilitar a leitura
+typedef struct elemento Elem;
+typedef Elem* Lista;  // Ponteiro para o início da lista
+
+// Função para criar uma nova lista (inicialmente vazia)
+Lista* cria_lista() {
+    Lista* li = malloc(sizeof(Lista));  // Aloca memória para o ponteiro da lista
+    if (li != NULL) {
+        *li = NULL;                     // Inicializa a lista como vazia
+    }
+    return li;
+}
+
+// Insere um elemento no início da lista
+int insere_inicio(Lista *li, int dado) {
+    if (li == NULL) return 0;
+
+    Elem *no = malloc(sizeof(Elem));   // Cria novo nó
+    if (no == NULL) return 0;
+
+    no->dado = dado;      // Atribui o valor ao nó
+    no->prox = *li;       // Aponta o próximo do novo nó para o antigo início
+    *li = no;             // Atualiza o início da lista para o novo nó
+    return 1;
+}
+
+// Insere um elemento no final da lista
+int insere_final(Lista *li, int dado) {
+    if (li == NULL) return 0;
+
+    Elem *no = malloc(sizeof(Elem));  // Cria novo nó
+    if (no == NULL) return 0;
+
+    no->dado = dado;
+    no->prox = NULL;
+
+    // Se a lista estiver vazia, insere como primeiro elemento
+    if (*li == NULL) {
+        *li = no;
+    } else {
+        Elem *aux = *li;
+        // Percorre até o último nó
+        while (aux->prox != NULL) {
+            aux = aux->prox;
+        }
+        aux->prox = no;  // Liga o último nó ao novo nó
+    }
+
+    return 1;
+}
+
+// Remove o primeiro elemento da lista
+int remove_inicio(Lista *li){
+    if (li == NULL || *li == NULL) return 0;
+
+    Elem *no = *li;         // Aponta para o primeiro nó
+    *li = no->prox;         // Atualiza o início da lista
+    free(no);               // Libera a memória do nó removido
+    return 1;
+}
+
+// Calcula o tamanho da lista (quantidade de elementos)
+int tamanho_lista(Lista *li) {
+    if (li == NULL) return -1;
+
+    int count = 0;
+    Elem* no = *li;
+
+    // Percorre a lista contando os nós
+    while (no != NULL) {
+        count++;
+        no = no->prox;
+    }
+    return count;
+}
+
+// Função para imprimir todos os elementos da lista
+void imprime_lista(Lista *li) {
+    if (li == NULL || *li == NULL) {
+        printf("Lista vazia.\n");
+        return;
+    }
+
+    Elem *no = *li;
+    printf("Elementos da lista: ");
+    while (no != NULL) {
+        printf("%d ", no->dado);
+        no = no->prox;
+    }
+    printf("\n");
+}
+
+// Função principal
+int main() {
+    Lista* li = cria_lista();  // Cria a lista
+
+    int dado;
+
+    // Insere 3 valores no início da lista
+    for (int i = 0; i < 3; i++) {
+        printf("Digite um valor para inserir no inicio: ");
+        scanf("%d", &dado);
+        insere_inicio(li, dado);
+    }
+
+    // Mostra o tamanho da lista
+    int tam = tamanho_lista(li);
+    printf("O tamanho da lista e: %d\n", tam);
+
+    // Imprime os elementos
+    im
