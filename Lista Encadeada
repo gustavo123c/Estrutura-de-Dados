@@ -99,6 +99,18 @@ void imprime_lista(Lista *li) {
     printf("\n");
 }
 
+void libera_lista(Lista *li){
+    if(li != NULL){
+        Elem *no;
+        while (li != NULL){
+            no = *li;
+            *li = no -> prox;
+            free(no);
+        }
+    free(li);
+    }
+}
+
 // Função principal
 int main() {
     Lista* li = cria_lista();  // Cria a lista
