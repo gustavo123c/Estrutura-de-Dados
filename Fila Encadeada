@@ -1,0 +1,120 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Definição dos tipos
+typedef struct elemento {
+    int dado;
+    struct elemento *prox;
+} Elem;
+
+typedef struct descritor {
+    struct elemento *inicio;
+    struct elemento *final;
+    int qtd;
+} Fila;
+
+// Função para criar uma fila
+Fila* cria_fila() {
+    Fila *fi = malloc(sizeof(Fila));
+    if (fi != NULL) {
+        fi->inicio = NULL;
+        fi->final = NULL;
+        fi->qtd = 0;
+    }
+    return fi;
+}
+
+// Inserir elemento na fila
+int insere_fila(Fila *fi, int x) {
+    if (fi == NULL) return 0;
+
+    Elem *no = malloc(sizeof(Elem));
+    if (no == NULL) return 0;
+
+    no->dado = x;
+    no->prox = NULL;
+
+    if (fi->final == NULL) {
+        fi->inicio = no;
+    } else {
+        fi->final->prox = no;
+    }
+
+    fi->final = no;
+    fi->qtd++;
+    return 1;
+}
+
+// Remover elemento da fila
+int remove_fila(Fila *fi) {
+    if (fi == NULL || fi->qtd == 0) return 0;
+
+    Elem *no = fi->inicio;
+    fi->inicio = fi->inicio->prox;
+    free(no);
+
+    if (fi->inicio == NULL) {
+        fi->final = NULL;
+    }
+
+    fi->qtd--;
+    return 1;
+}
+
+// Consultar o primeiro elemento da fila
+int consulta_fila(Fila *fi, int *x) {
+    if (fi == NULL || fi->qtd == 0) return 0;
+
+    *x = fi->inicio->dado;
+    return 1;
+}
+
+// Verificar se a fila está vazia
+int fila_vazia(Fila *fi) {
+    if (fi == NULL) return 0;
+    return (fi->qtd == 0);
+}
+
+// Retornar tamanho da fila
+int tamanho_fila(Fila *fi) {
+    if (fi == NULL) return 0;
+    return fi->qtd;
+}
+
+// Liberar a memória da fila
+void libera_fila(Fila *fi) {
+    if (fi != NULL) {
+        while (!fila_vazia(fi)) {
+            remove_fila(fi);
+        }
+        free(fi);
+    }
+}
+
+// Função principal
+int main() {
+    Fila *fila = cria_fila();
+    if (fila == NULL) {
+        printf("Erro ao criar fila.\n");
+        return 1;
+    }
+
+    // Inserção de 3 elementos
+    insere_fila(fila, 10);
+    insere_fila(fila, 20);
+    insere_fila(fila, 30);
+
+    // Impressão dos elementos
+    int valor;
+    while (!fila_vazia(fila)) {
+        if (consulta_fila(fila, &valor)) {
+            printf("Valor: %d\n", valor);
+        }
+        remove_fila(fila);
+    }
+
+    // Liberação da memória
+    libera_fila(fila);
+
+    return 0;
+}
