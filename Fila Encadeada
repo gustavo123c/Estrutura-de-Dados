@@ -91,6 +91,8 @@ void libera_fila(Fila *fi) {
     }
 }
 
+void imprimir_fila(Fila *fi){
+
 // Função principal
 int main() {
     Fila *fila = cria_fila();
