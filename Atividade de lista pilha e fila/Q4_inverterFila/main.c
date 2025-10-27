@@ -1,24 +1,27 @@
-#include <stdio.h>  // Biblioteca padrão
+#include <stdio.h>   // Biblioteca padrão
 #include "filaInversa.h"   // Inclui a fila
 
 int main() {
-    Fila f;                        // Declara uma fila
-    inicializarFila(&f);           // Inicializa a fila
+    Fila *f = criar_fila();        // Cria e inicializa a fila dinamicamente
+    if (f == NULL) {
+        printf("Erro ao criar a fila!\n");
+        return 1;
+    }
 
     // Insere valores na fila
-    enfileirar(&f, 10);            // Adiciona 10
-    enfileirar(&f, 20);            // Adiciona 20
-    enfileirar(&f, 30);            // Adiciona 30
-    enfileirar(&f, 40);            // Adiciona 40
-    enfileirar(&f, 50);            // Adiciona 50
+    enfileirar(f, 10);
+    enfileirar(f, 20);
+    enfileirar(f, 30);
+    enfileirar(f, 40);
+    enfileirar(f, 50);
 
-    printf("Fila original:\n");    // Mostra texto
-    exibirFila(&f);                // Exibe a fila atual
+    printf("Fila original:\n");
+    exibirFila(f);
 
-    reverso(&f);                   // Chama a função para inverter
+    reverso(f);  // Inverte a fila
 
-    printf("Fila invertida:\n");   // Mostra texto
-    exibirFila(&f);                // Exibe a fila invertida
+    printf("Fila invertida:\n");
+    exibirFila(f);
 
-    return 0;                      // Finaliza o programa
+    return 0;
 }

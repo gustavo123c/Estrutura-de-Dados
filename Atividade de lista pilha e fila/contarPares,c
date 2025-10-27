@@ -19,8 +19,9 @@ void inserirFim(No** lista, int valor) {
         No* aux = *lista;
         while (aux->prox != NULL) {
             aux = aux->prox;  // vai até o último nó
-        }
+        
         aux->prox = novo;  // insere no final
+        }
     }
 }
 
