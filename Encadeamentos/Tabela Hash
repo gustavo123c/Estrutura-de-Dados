@@ -84,9 +84,14 @@ int main() {
 
     // Inserindo valores
     insere_Hash_semColisao(ha, 50);
+    insere_Hash_semColisao(ha, 60);
+    insere_Hash_semColisao(ha, 80);
+    insere_Hash_semColisao(ha, 70);
+    insere_Hash_semColisao(ha, 15);
 
 
     imprimir_hash(ha);
 
    
 }
+
